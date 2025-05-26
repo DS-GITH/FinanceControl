@@ -1,13 +1,42 @@
 <?php
 
+// Dados de conexão com o banco
 $servidor = "localhost";
 $usuario = "root";
-$senha = "";
-$banco = "users";
+$senha = "aluno"; // senha do MySQL
+$banco = "usuarios";
 
-$conexao = new mysqli($servidor, $usuario, $senha, $banco);
+// Conexão com o banco
+$conexao = mysqli_connect($servidor, $usuario, $senha, $banco);
 
-if ($conexao->connect_error) {
-    die("Falha na conexão: " . $conexao->connect_error);
+// Verificação da conexão
+if (!$conexao) {
+    die("❌ Falha na conexão: " . mysqli_connect_error());
 }
+
+echo "✅ Conexão sucedida<br>";
+
+// Recebe os dados do formulário
+$nome = $_POST['username'];
+$email = $_POST['email'];
+$senhaNormal = $_POST['password'];
+
+// Segurança: escapa os caracteres especiais (evita SQL Injection)
+$nome = mysqli_real_escape_string($conexao, $nome);
+$email = mysqli_real_escape_string($conexao, $email);
+$senhaNormal = mysqli_real_escape_string($conexao, $senhaNormal);
+
+// Criptografa a senha antes de salvar
+$senhaSegura = password_hash($senhaNormal, PASSWORD_DEFAULT);
+
+// Comando SQL para inserir no banco
+$sql = "INSERT INTO user (nome, email, senha) VALUES ('$nome', '$email', '$senhaSegura')";
+
+// Executa o SQL
+if (mysqli_query($conexao, $sql)) {
+    echo "✅ Cadastro realizado com sucesso!";
+} else {
+    echo "❌ Erro ao cadastrar: " . mysqli_error($conexao);
+}
+
 ?>
