@@ -35,6 +35,8 @@
     </form>
 
 </main>
+
+<?php
     
 </body>
 </html>
