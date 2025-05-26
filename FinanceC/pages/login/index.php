@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Login</title>
 </head>
 <body>
 
 <main> 
 
-    <h1>Login</h1>
+    <div class="title"> <h1>Login</h1> </div>
 
 
     <form action="login.php" method="post">
         
-        <label for="username">Usuário:</label>
+    <div class="container">
+        <div class="input">
+
+        <label for="username" class="inputText">Usuário:</label>
         <input type="text" id="username" name="username" required>
+        </div>
         
-        <label for="password">Senha:</label>
+        <div class="input">
+        <label for="password" class="inputText">Senha:</label>
         <input type="password" id="password" name="password" required>
+        </div>
         
+        <div class="submit">
         <button type="submit">Entrar</button>
+        </div>
+    </div>
 
     </form>
 
