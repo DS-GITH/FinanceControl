@@ -20,17 +20,19 @@ echo "✅ Conexão sucedida<br>";
 $nome = $_POST['username'];
 $email = $_POST['email'];
 $senhaNormal = $_POST['password'];
+$dataNasc = $_POST['datanasc'];
 
 // Segurança: escapa os caracteres especiais (evita SQL Injection)
 $nome = mysqli_real_escape_string($conexao, $nome);
 $email = mysqli_real_escape_string($conexao, $email);
 $senhaNormal = mysqli_real_escape_string($conexao, $senhaNormal);
+$dataNasc = mysqli_real_escape_string($conexao, $dataNasc);
 
 // Criptografa a senha antes de salvar
 $senhaSegura = password_hash($senhaNormal, PASSWORD_DEFAULT);
 
 // Comando SQL para inserir no banco
-$sql = "INSERT INTO user (nome, email, senha) VALUES ('$nome', '$email', '$senhaSegura')";
+$sql = "INSERT INTO user (nome, email, senha, datanasc) VALUES ('$nome', '$email', '$senhaSegura', '$dataNasc')";
 
 // Executa o SQL
 if (mysqli_query($conexao, $sql)) {
